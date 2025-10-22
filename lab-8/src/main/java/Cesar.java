@@ -26,7 +26,7 @@ public class Cesar {
             System.out.println("Текст зашифровано та записано у crypto_text.txt");
 
         } catch (IOException | URISyntaxException e) {
-            System.err.println("❌ Помилка при читанні або записі файлу: " + e.getMessage());
+            System.err.println("Помилка при читанні або записі файлу: " + e.getMessage());
         }
     }
 
