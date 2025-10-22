@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoveToFront {
-    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz ";
+    private static final String ALPHABET = " абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
 
     public static List<Integer> encode(String input) {
         input = input.toLowerCase();
