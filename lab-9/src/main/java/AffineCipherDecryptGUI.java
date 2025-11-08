@@ -4,7 +4,8 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+//E(x)=(a⋅x+b)m
+//x = e - bm / an = e/an -b/n
 public class AffineCipherDecryptGUI extends JFrame {
 
     private final JTextField aField;

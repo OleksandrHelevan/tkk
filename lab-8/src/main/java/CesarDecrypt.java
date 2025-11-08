@@ -18,7 +18,6 @@ public class CesarDecrypt {
             }
 
             Path encryptedFile = Path.of(resource.toURI());
-            System.out.println("Вхідний файл: " + encryptedFile.toAbsolutePath());
 
             if (!Files.exists(encryptedFile)) {
                 System.err.println("Вхідний файл не існує за шляхом: " + encryptedFile);
@@ -29,25 +28,16 @@ public class CesarDecrypt {
             Files.createDirectories(outputDir);
             Path outputFile = outputDir.resolve("decrypted.txt");
 
-            List<String> lines = Files.readAllLines(encryptedFile);
-            StringBuilder text = new StringBuilder();
-            for (String line : lines) {
-                text.append(line).append(System.lineSeparator());
-            }
-
-            String encryptedText = text.toString();
-            System.out.println("Прочитано символів: " + encryptedText.length());
+            String encryptedText = Cesar.getText("encrypted.txt");
 
             printFrequency(encryptedText);
 
             String decryptedText = decrypt(encryptedText, SHIFT);
             Files.writeString(outputFile, decryptedText);
 
-            System.out.println("Текст дешифровано та записано у " + outputFile.toAbsolutePath());
-
         } catch (IOException | URISyntaxException e) {
             System.err.println("Помилка при читанні або записі файлу:");
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 
@@ -56,12 +46,9 @@ public class CesarDecrypt {
         for (char ch : text.toCharArray()) {
             if (Character.isLetter(ch)) {
                 char base = Character.isUpperCase(ch) ? 'A' : 'a';
-                int x = ch - base;
-                int dec = (x - shift + 26) % 26;
+                int dec = ((ch - base) - shift + 26) % 26;
                 result.append((char) (dec + base));
-            } else {
-                result.append(ch);
-            }
+            } else result.append(ch);
         }
         return result.toString();
     }
@@ -78,7 +65,6 @@ public class CesarDecrypt {
             }
         }
 
-        System.out.println("Відносна частота символів:");
         int finalTotalLetters = totalLetters;
         countMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
