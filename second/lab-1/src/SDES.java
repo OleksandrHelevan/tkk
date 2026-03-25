@@ -33,7 +33,6 @@ public class SDES {
 
         left = leftShift(left, 1);
         right = leftShift(right, 1);
-
         int[] k1 = permute(concat(left, right), P8);
 
         left = leftShift(left, 2);
